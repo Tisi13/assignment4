@@ -1,0 +1,45 @@
+PROTOCOL:
+
+AUDIOCLIENT:
+
+sends a packet to the audioserver containing the name of the audiofile in wav.
+
+AUDIOSERVER:
+
+receives the packet containing the audiofile name in wav.
+
+then retrieves the data from the audiofile : channels, sample rate and sample size
+and store them into a struct
+
+then sends the data to the audioclient.
+
+AUDIOCLIENT:
+
+receives the packet containing the struct data: channels, sample rate and sample size
+
+and then sets up the audio parameters.
+
+then sends a request over to audioserver to receive one packet containing a chunk of audio.
+
+AUDIOSERVER:
+
+receives the request for sending one packet
+
+reads in a chunk of the audiofile
+
+sends this chunk to the audioclient in packet
+
+AUDIOSCLIENT:
+
+receives packet with the chuck of audiofile
+
+checks if it is the packet that you where waiting to receive
+- if it is the packet, it plays the audio
+- if it is not the packet it would play silence
+
+then sends a request for another packet
+
+
+
+
+
